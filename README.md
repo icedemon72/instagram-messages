@@ -31,7 +31,7 @@ const ig = require('instagram-messsages')
 const fs = require('fs')
 const json = require('./path-to-your-json-file.json') 
 
-fs.appendFile("Text.txt", ig.getSortedMessages(json, ["nicolas.cage", "johnny.depp"]).join("\n"), function () {});
+fs.writeFile("Text.txt", ig.getSortedMessages(json, ["nicolas.cage", "johnny.depp"]).join("\n"), function () {});
 /*
 The result will be something like this:
 <09/12/2018 10:12:23> johnny.depp: hey
