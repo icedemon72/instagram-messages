@@ -1,11 +1,8 @@
 {
   "name": "instagram-messages",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A simple npm package for extracting instagram messages",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/icedemon72/instagram-messages.git"
@@ -20,5 +17,5 @@
   "bugs": {
     "url": "https://github.com/icedemon72/instagram-messages/issues"
   },
-  "homepage": "https://github.com/icedemon72/instagram-messages#readme"
+  "homepage": "https://github.com/icedemon72/instagram-messages"
 }
