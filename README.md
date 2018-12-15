@@ -7,7 +7,7 @@ The main goal of this package is actually just writing a (.txt) file with your m
 
 # Installation
 
-```
+```js
 const ig = require('instagram-messsages')
 const json = require('./path-to-your-json-file.json') 
 // You'll need json file in order to actually do something with this npm package
@@ -19,14 +19,14 @@ const json = require('./path-to-your-json-file.json')
 
 Before you start, just `console.log()` this in order to see your chats
 
-```
+```js
 ig.getChats(); 
 // => result is a multi-dimensional array with your chats, e.g. [["nicolas.cage", "johnny.depp"], ["johnny.depp", "monica.bellucci"]]
 ```
 ## .getSortedMessages(jsonFile, [chat])
 
 You can use this to write a .txt file
-```
+```js
 const ig = require('instagram-messsages')
 const fs = require('fs')
 const json = require('./path-to-your-json-file.json') 
@@ -45,7 +45,7 @@ etc.
 
 On this way you can get messages just from a certain user or from more users (if you are in a group chat)
 
-```
+```js
 ig.getMessagesFrom(json, ["nicolas.cage", "johnny.depp"], ["johnny.depp"]);
 ```
 
@@ -53,7 +53,7 @@ ig.getMessagesFrom(json, ["nicolas.cage", "johnny.depp"], ["johnny.depp"]);
 
 This is useful if you are going to do something with data
 
-```
+```js
 ig.getMessageObject(json, ["nicolas.cage", "johnny.depp"]);
 ```
 
@@ -61,7 +61,7 @@ ig.getMessageObject(json, ["nicolas.cage", "johnny.depp"]);
 
 Same as `.getMessagesFrom()` but it returns an array with objects
 
-```
+```js
 ig.getMessagesObjectFrom(json, ["nicolas.cage", "johnny.depp", "monica.bellucci"], ["monica.bellucci", "johnny.depp"]);
 ```
 
@@ -69,7 +69,7 @@ ig.getMessagesObjectFrom(json, ["nicolas.cage", "johnny.depp", "monica.bellucci"
 
 With this you can get the number of messages from a certain user or from more users.
 
-```
+```js
 ig.getNumberOfMessages(json, ["nicolas.cage", "johnny.depp", "monica.bellucci"], ["johnny.depp"]);
 ```
 
