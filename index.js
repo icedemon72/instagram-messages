@@ -11,7 +11,13 @@ function checkForContent(obj) {
     else if(obj.animated_media_images) {
         return obj.animated_media_images.fixed_height_still.url;
     }
+    else if(obj.media_share_url) {
+        return obj.media_share_url;
+    }
     return obj.heart;
+}
+function checker(json, convo, i, j) {
+    return(json[convo[i]].conversation[j].text || json[convo[i]].conversation[j].animated_media_images || json[convo[i]].conversation[j].media_share_url || json[convo[i]].conversation[j].heart || json[convo[i]].conversation[j].media);
 }
 function getConvoNumber(json, part) {
     let x = [];
@@ -27,7 +33,7 @@ function getSortedMessages(json, chatParticipants) {
     let convo = getConvoNumber(json, chatParticipants);
     for(let i = 0; i < convo.length; i++) {
         for(let j = 0; j < json[convo[i]].conversation.length; j++) {
-            if(json[convo[i]].conversation[j].text || json[convo[i]].conversation[j].animated_media_images || json[convo[i]].conversation[j].heart || json[convo[i]].conversation[j].media) {
+            if(checker(json, convo, i, j)) {
                 let content = checkForContent(json[convo[i]].conversation[j]);
                 result.push(`<${json[convo[i]].conversation[j].created_at.split("T")[0].split("-").reverse().join("/")} ${json[convo[i]].conversation[j].created_at.split("T")[1].split(".")[0]}> ${json[convo[i]].conversation[j].sender}: ${content}`);    
             }
@@ -40,7 +46,7 @@ function getMessagesObject(json, chatParticipants) {
     let convo = getConvoNumber(json, chatParticipants);
     for(let i = 0; i < convo.length; i++) {
         for(let j = 0; j < json[convo[i]].conversation.length; j++) {
-            if(json[convo[i]].conversation[j].text || json[convo[i]].conversation[j].animated_media_images || json[convo[i]].conversation[j].heart || json[convo[i]].conversation[j].media) {
+            if(checker(json, convo, i, j)) {
                 let content = checkForContent(json[convo[i]].conversation[j]);
                 result.push({author: json[convo[i]].conversation[j].sender, content: content, date: json[convo[i]].conversation[j].created_at})
             }
@@ -62,7 +68,7 @@ function getNumberOfMessages(json, chatParticipants, authors = chatParticipants)
     let convo = getConvoNumber(json, chatParticipants);
     for(let i = 0; i < convo.length; i++) {
         for(let j = 0; j < json[convo[i]].conversation.length; j++) {
-            if((json[convo[i]].conversation[j].text || json[convo[i]].conversation[j].animated_media_images || json[convo[i]].conversation[j].heart || json[convo[i]].conversation[j].media) && authors.includes(json[convo[i]].conversation[j].sender)) {
+            if((checker(json, convo, i, j)) && authors.includes(json[convo[i]].conversation[j].sender)) {
                 result++;
             }
         }
@@ -74,7 +80,7 @@ function getMessagesFrom(json, chatParticipants, authors = chatParticipants) {
     let convo = getConvoNumber(json, chatParticipants);
     for(let i = 0; i < convo.length; i++) {
         for(let j = 0; j < json[convo[i]].conversation.length; j++) {
-            if((json[convo[i]].conversation[j].text || json[convo[i]].conversation[j].animated_media_images || json[convo[i]].conversation[j].heart || json[convo[i]].conversation[j].media) && authors.includes(json[convo[i]].conversation[j].sender)) {
+            if((checker(json, convo, i, j)) && authors.includes(json[convo[i]].conversation[j].sender)) {
                 let content = checkForContent(json[convo[i]].conversation[j]);
                 result.push(`<${json[convo[i]].conversation[j].created_at.split("T")[0].split("-").reverse().join("/")} ${json[convo[i]].conversation[j].created_at.split("T")[1].split(".")[0]}> ${json[convo[i]].conversation[j].sender}: ${content}`);
             }
@@ -87,7 +93,7 @@ function getMessagesObjectFrom(json, chatParticipants, authors = chatParticipant
     let convo = getConvoNumber(json, chatParticipants);
     for(let i = 0; i < convo.length; i++) {
         for(let j = 0; j < json[convo[i]].conversation.length; j++) {
-            if((json[convo[i]].conversation[j].text || json[convo[i]].conversation[j].animated_media_images || json[convo[i]].conversation[j].heart || json[convo[i]].conversation[j].media) && authors.includes(json[convo[i]].conversation[j].sender)) {
+            if((checker(json, convo, i, j)) && authors.includes(json[convo[i]].conversation[j].sender)) {
                 let content = checkForContent(json[convo[i]].conversation[j]);
                 result.push({author: json[convo[i]].conversation[j].sender, content: content, date: json[convo[i]].conversation[j].created_at});
             }
